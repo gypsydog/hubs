@@ -1,0 +1,7 @@
+requests
+requests_toolbelt
+PyHamcrest
+pytest
+structlog
+allure-pytest
+pytest-xdist
