@@ -38,7 +38,7 @@ def get_models_paths(formats):
 def upload_model(file_path: str,
                  tech: str = 'cnc-machining',
                  unit: str = 'mm',
-                 extrusion_height: str = '1',
+                 extrusion_height: str = '1',  # Required only for DXF upload, but does not affect other uploads
                  expected_code: int = 202,):
     file_name = file_path.split('/')[1]
 

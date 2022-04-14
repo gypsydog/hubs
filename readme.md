@@ -41,6 +41,7 @@ But still there are some things I would change in it if it was used as a part of
 * Improve logging with more structured log: current solution is sufficient for the challenge. I guess using more advanced logger would be over-engineering. Still effective logging is a great value for a testing project.
 * Add other technologies into parametrization - only 'cnc-machining', 'sheet-metal' are available for me, I guess at least 'FDM' is available in other countries.
 * Further improvements of the project will require project structure complification.
+* If the project evolves, it would be nice to use xdist for distributed test runs. I've tried to run project using xdist but there is an issue with the fixture scope: not all workers get authorization. I've found the solution (googled it actually), but it is way too complicated for current implementation.
 
 I liked working on the task, solving issues and digging out the API with no description provided :)
 Hope my work fits the requirements, and I'll have a chance to discuss it with the team. 
