@@ -44,7 +44,7 @@ def upload_model(headers: dict,
                  tech: str = 'cnc-machining',
                  unit: str = 'mm',
                  extrusion_height: str = '1',  # Required only for DXF upload, but does not affect other uploads
-                 expected_code: int = 202) -> requests.Response:
+                 expected_code: list = [202]) -> requests.Response:
     file_name = file_path.split('/')[1]
 
     with open(file_path, 'rb') as file:

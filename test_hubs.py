@@ -30,7 +30,7 @@ def test_model_upload(file_path, tech, login_headers):
     upload_model(headers=login_headers,
                  file_path=file_path,
                  tech=tech,
-                 expected_code=202)
+                 expected_code=[200, 202])
 
 
 @pytest.mark.parametrize('tech', ['cnc-machining', 'sheet-metal'])
@@ -41,5 +41,5 @@ def test_model_upload_negative(file_path, tech, login_headers):
     response = upload_model(headers=login_headers,
                             file_path=file_path,
                             tech=tech,
-                            expected_code=400)
+                            expected_code=[400])
     check_unsupported_file_type_text(response)
