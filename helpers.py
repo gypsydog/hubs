@@ -1,6 +1,8 @@
 import copy
 import json
 from os import walk
+
+import requests
 from requests_toolbelt import MultipartEncoder
 from checkers import check_response_code, check_ok
 from client import Client
@@ -42,7 +44,7 @@ def upload_model(headers: dict,
                  tech: str = 'cnc-machining',
                  unit: str = 'mm',
                  extrusion_height: str = '1',  # Required only for DXF upload, but does not affect other uploads
-                 expected_code: int = 202) -> None:
+                 expected_code: int = 202) -> requests.Response:
     file_name = file_path.split('/')[1]
 
     with open(file_path, 'rb') as file:
@@ -59,3 +61,4 @@ def upload_model(headers: dict,
         upload_response = hubs.upload(payload, upload_headers)
 
     check_response_code(upload_response, expected_code=expected_code)
+    return upload_response

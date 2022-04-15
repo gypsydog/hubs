@@ -5,6 +5,7 @@
 .idea_modules
 *.iws
 .vscode
+.pytest_cache
 
 # OS specific files
 .DS_Store
