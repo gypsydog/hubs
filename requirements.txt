@@ -1,7 +1,5 @@
-requests
-requests_toolbelt
-PyHamcrest
-pytest
-structlog
-allure-pytest
-pytest-xdist
+requests==2.27.1
+requests_toolbelt==0.9.1
+PyHamcrest==2.0.3
+pytest==7.1.1
+allure-pytest==2.9.45

@@ -21,7 +21,7 @@ class Client:
         self.headers = headers
         self.session = requests.session()
 
-    def _send_request(self, method: str, path: str, **kwargs):
+    def _send_request(self, method: str, path: str, **kwargs) -> requests.Response:
         url = f'{self.host}{path}'
         params = (kwargs.get('params', None),)
         data = (kwargs.get('data', None),)
@@ -59,8 +59,8 @@ class Client:
         return response
 
     @step('Sign in')
-    def sign_in(self, sign_in_data: dict = SIGN_IN_DATA) -> requests.Response:
-        sign_in_response = self._post(url=SIGN_IN_URL, payload=sign_in_data)
+    def sign_in(self, sign_in_data: dict = SIGN_IN_DATA, headers: dict = DEFAULT_HEADERS) -> requests.Response:
+        sign_in_response = self._post(url=SIGN_IN_URL, headers=headers, payload=sign_in_data)
         return sign_in_response
 
     @step('Send GET jwt request')

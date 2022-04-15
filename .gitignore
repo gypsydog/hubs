@@ -42,6 +42,7 @@ localtest
 
 # Test reports
 allure-results
+allure-report
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out

@@ -19,13 +19,15 @@ def get_token() -> str:
 
 
 @step('Update headers with authorization token')
-def update_headers_token():
+def update_headers_token() -> dict:
     token = get_token()
-    DEFAULT_HEADERS.update({'authorization': f'Bearer {token}'})
+    headers = copy.deepcopy(DEFAULT_HEADERS)
+    headers.update({'authorization': f'Bearer {token}'})
+    return headers
 
 
 @step('Prepare test models for usage in test parametrization')
-def get_models_paths(formats):
+def get_models_paths(formats) -> dict:
     _, _, filenames = next(walk('test_models'), (None, None, []))
     paths = {}
     for name in filenames:
@@ -35,11 +37,12 @@ def get_models_paths(formats):
     return paths
 
 
-def upload_model(file_path: str,
+def upload_model(headers: dict,
+                 file_path: str,
                  tech: str = 'cnc-machining',
                  unit: str = 'mm',
                  extrusion_height: str = '1',  # Required only for DXF upload, but does not affect other uploads
-                 expected_code: int = 202,):
+                 expected_code: int = 202) -> None:
     file_name = file_path.split('/')[1]
 
     with open(file_path, 'rb') as file:
@@ -51,8 +54,8 @@ def upload_model(file_path: str,
                 'file': (file_name, file, 'text/plain')
             }
         )
-        headers = copy.deepcopy(DEFAULT_HEADERS)
-        headers.update({'Content-Type': payload.content_type})
-        upload_response = hubs.upload(payload, headers)
+        upload_headers = copy.deepcopy(headers)
+        upload_headers.update({'Content-Type': payload.content_type})
+        upload_response = hubs.upload(payload, upload_headers)
 
     check_response_code(upload_response, expected_code=expected_code)
